@@ -12,4 +12,5 @@ public class Topic {
     private Long id;
     private String topicId;
     private String name;
+    private Boolean isVisible;
 }
