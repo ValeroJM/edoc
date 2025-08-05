@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -121,7 +122,12 @@ public class EdocController {
 
     @GetMapping("/docs")
     public ResponseEntity<List<DocRequest>> getAllDocs(){
-        List<DocRequest> allDocs = docService.getAllDocs();
+        List<Doc> docs = docService.getAllDocs();
+        List<DocRequest> allDocs = new ArrayList<>();
+
+        for(Doc doc: docs){
+
+        }
         return new ResponseEntity<>(allDocs, HttpStatus.OK);
     }
 
