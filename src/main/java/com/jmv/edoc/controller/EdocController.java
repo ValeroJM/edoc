@@ -3,6 +3,7 @@ package com.jmv.edoc.controller;
 import com.jmv.edoc.model.entity.Doc;
 import com.jmv.edoc.model.entity.Topic;
 import com.jmv.edoc.model.request.DocRequest;
+import com.jmv.edoc.model.request.Sale;
 import com.jmv.edoc.model.request.TopicRequest;
 import com.jmv.edoc.service.DocService;
 import com.jmv.edoc.service.TopicService;
@@ -73,6 +74,21 @@ public class EdocController {
     @GetMapping("/doc/{id}")
     public ResponseEntity<Doc> getDoc(@PathVariable Long id){
         Doc doc = docService.getById(id);
+
+        DocRequest docRequest = new DocRequest();
+        docRequest.setDocId(doc.getDocId());
+        docRequest.setRef(doc.getRef());
+        docRequest.setDate(doc.getDate());
+        docRequest.setTopicNum(doc.getTopicNum());
+        docRequest.setName(doc.getName());
+        docRequest.setImage(doc.getImage());
+        docRequest.setDescription(doc.getDescription());
+        docRequest.setAuthor(doc.getAuthor());
+        docRequest.setStars(doc.getStars());
+
+        Sale sale = new Sale();
+        docRequest.setSale(sale.setInSale(doc.getInSale());
+
         return new ResponseEntity<>(doc, HttpStatus.OK);
     }
 
