@@ -16,6 +16,7 @@ public class TopicServiceImp implements TopicService{
     @Override
     public String setAndUpdate(TopicRequest topicRequest) {
         Topic topic = new Topic();
+        topic.setTopicId(topicRequest.getTopicId());
         topic.setTopicNum(topicRequest.getTopicNum());
         topic.setName(topicRequest.getName());
         topic.setIsVisible(topicRequest.getIsVisible());

@@ -17,6 +17,7 @@ public class DocServiceImp implements DocService{
     @Override
     public String setAndUpdate(DocRequest docRequest) {
         Doc doc = new Doc();
+        doc.setDocId(docRequest.getDocId());
         doc.setRef(docRequest.getRef());
         doc.setDate(docRequest.getDate());
         doc.setTopicNum(docRequest.getTopicNum());
