@@ -72,7 +72,7 @@ public class EdocController {
     }
 
     @GetMapping("/doc/{id}")
-    public ResponseEntity<Doc> getDoc(@PathVariable Long id){
+    public ResponseEntity<DocRequest> getDoc(@PathVariable Long id){
         Doc doc = docService.getById(id);
 
         DocRequest docRequest = new DocRequest();
@@ -87,20 +87,41 @@ public class EdocController {
         docRequest.setStars(doc.getStars());
 
         Sale sale = new Sale();
-        docRequest.setSale(sale.setInSale(doc.getInSale());
+        sale.setInSale(doc.getInSale());
+        sale.setPrice1(doc.getPrice1());
+        sale.setPrice2(doc.getPrice2());
 
-        return new ResponseEntity<>(doc, HttpStatus.OK);
+        docRequest.setSale(sale);
+
+        return new ResponseEntity<>(docRequest, HttpStatus.OK);
     }
 
     @GetMapping("/doc/{ref}")
-    public ResponseEntity<Doc> getDocByRef(@PathVariable String ref){
+    public ResponseEntity<DocRequest> getDocByRef(@PathVariable String ref){
         Doc doc = docService.getByRef(ref);
-        return new ResponseEntity<>(doc, HttpStatus.OK);
+        DocRequest docRequest = new DocRequest();
+        docRequest.setDocId(doc.getDocId());
+        docRequest.setRef(doc.getRef());
+        docRequest.setDate(doc.getDate());
+        docRequest.setTopicNum(doc.getTopicNum());
+        docRequest.setName(doc.getName());
+        docRequest.setImage(doc.getImage());
+        docRequest.setDescription(doc.getDescription());
+        docRequest.setAuthor(doc.getAuthor());
+        docRequest.setStars(doc.getStars());
+
+        Sale sale = new Sale();
+        sale.setInSale(doc.getInSale());
+        sale.setPrice1(doc.getPrice1());
+        sale.setPrice2(doc.getPrice2());
+
+        docRequest.setSale(sale);
+        return new ResponseEntity<>(docRequest, HttpStatus.OK);
     }
 
     @GetMapping("/docs")
-    public ResponseEntity<List<Doc>> getAllDocs(){
-        List<Doc> allDocs = docService.getAllDocs();
+    public ResponseEntity<List<DocRequest>> getAllDocs(){
+        List<DocRequest> allDocs = docService.getAllDocs();
         return new ResponseEntity<>(allDocs, HttpStatus.OK);
     }
 
