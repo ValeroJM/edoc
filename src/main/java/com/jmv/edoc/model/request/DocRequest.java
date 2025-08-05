@@ -1,6 +1,9 @@
-package com.jmv.edoc.model.DTO;
+package com.jmv.edoc.model.request;
 
-public class DocDTO {
+import lombok.Data;
+
+@Data
+public class DocRequest {
     private Long docId;
     private String ref;
     private String date;
@@ -10,5 +13,5 @@ public class DocDTO {
     private String description;
     private String author;
     private Integer stars;
-    private SaleDTO saleDTO;
+    private Sale sale;
 }

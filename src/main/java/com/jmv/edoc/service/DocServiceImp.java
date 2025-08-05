@@ -1,6 +1,7 @@
 package com.jmv.edoc.service;
 
 import com.jmv.edoc.model.entity.Doc;
+import com.jmv.edoc.model.request.DocRequest;
 import com.jmv.edoc.repository.DocRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,20 @@ public class DocServiceImp implements DocService{
     DocRepository docRepository;
 
     @Override
-    public String setAndUpdate(Doc doc) {
+    public String setAndUpdate(DocRequest docRequest) {
+        Doc doc = new Doc();
+        doc.setRef(docRequest.getRef());
+        doc.setDate(docRequest.getDate());
+        doc.setTopicNum(docRequest.getTopicNum());
+        doc.setName(docRequest.getName());
+        doc.setImage(docRequest.getImage());
+        doc.setDescription(docRequest.getDescription());
+        doc.setAuthor(docRequest.getAuthor());
+        doc.setStars(docRequest.getStars());
+        doc.setInSale(docRequest.getSale().getInSale());
+        doc.setPrice1(docRequest.getSale().getPrice1());
+        doc.setPrice2(docRequest.getSale().getPrice2());
+
         docRepository.save(doc);
         return "Success";
     }

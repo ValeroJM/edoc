@@ -2,6 +2,7 @@ package com.jmv.edoc.controller;
 
 import com.jmv.edoc.model.entity.Doc;
 import com.jmv.edoc.model.entity.Topic;
+import com.jmv.edoc.model.request.DocRequest;
 import com.jmv.edoc.model.request.TopicRequest;
 import com.jmv.edoc.service.DocService;
 import com.jmv.edoc.service.TopicService;
@@ -58,14 +59,14 @@ public class EdocController {
     }
 
     @PostMapping("/doc")
-    public ResponseEntity<String> createDoc(@RequestBody Doc doc){
-        String status = docService.setAndUpdate(doc);
+    public ResponseEntity<String> createDoc(@RequestBody DocRequest docRequest){
+        String status = docService.setAndUpdate(docRequest);
         return new ResponseEntity<>(status, HttpStatus.CREATED);
     }
 
     @PutMapping("/doc")
-    public ResponseEntity<String> updateDoc(@RequestBody Doc doc){
-        String status = docService.setAndUpdate(doc);
+    public ResponseEntity<String> updateDoc(@RequestBody DocRequest docRequest){
+        String status = docService.setAndUpdate(docRequest);
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
 

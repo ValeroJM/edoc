@@ -1,11 +1,12 @@
 package com.jmv.edoc.service;
 
 import com.jmv.edoc.model.entity.Doc;
+import com.jmv.edoc.model.request.DocRequest;
 
 import java.util.List;
 
 public interface DocService {
-    public String setAndUpdate(Doc doc);
+    public String setAndUpdate(DocRequest docRequest);
 
     public Doc getById(Long id);
 
