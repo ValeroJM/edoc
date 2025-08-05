@@ -1,4 +1,4 @@
-package com.jmv.edoc.model;
+package com.jmv.edoc.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

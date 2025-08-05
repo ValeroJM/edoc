@@ -1,6 +1,6 @@
 package com.jmv.edoc.service;
 
-import com.jmv.edoc.model.Doc;
+import com.jmv.edoc.model.entity.Doc;
 
 import java.util.List;
 

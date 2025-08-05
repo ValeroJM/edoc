@@ -1,7 +1,8 @@
 package com.jmv.edoc.controller;
 
-import com.jmv.edoc.model.Doc;
-import com.jmv.edoc.model.Topic;
+import com.jmv.edoc.model.entity.Doc;
+import com.jmv.edoc.model.entity.Topic;
+import com.jmv.edoc.model.request.TopicRequest;
 import com.jmv.edoc.service.DocService;
 import com.jmv.edoc.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class EdocController {
     }
 
     @PostMapping("/topic")
-    public ResponseEntity<String> createTopic(@RequestBody Topic topic){
-        String status = topicService.setAndUpdate(topic);
+    public ResponseEntity<String> createTopic(@RequestBody TopicRequest topicRequest){
+        String status = topicService.setAndUpdate(topicRequest);
         return new ResponseEntity<>(status, HttpStatus.CREATED);
     }
 

@@ -1,6 +1,6 @@
 package com.jmv.edoc.service;
 
-import com.jmv.edoc.model.Doc;
+import com.jmv.edoc.model.entity.Doc;
 import com.jmv.edoc.repository.DocRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

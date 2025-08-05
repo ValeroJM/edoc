@@ -1,6 +1,7 @@
 package com.jmv.edoc.service;
 
-import com.jmv.edoc.model.Topic;
+import com.jmv.edoc.model.entity.Topic;
+import com.jmv.edoc.model.request.TopicRequest;
 import com.jmv.edoc.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,11 @@ public class TopicServiceImp implements TopicService{
     TopicRepository topicRepository;
 
     @Override
-    public String setAndUpdate(Topic topic) {
+    public String setAndUpdate(TopicRequest topicRequest) {
+        Topic topic = new Topic();
+        topic.setTopicNum(topicRequest.getTopicNum());
+        topic.setName(topicRequest.getName());
+        topic.setIsVisible(topicRequest.getIsVisible());
         topicRepository.save(topic);
         return "Success";
     }
