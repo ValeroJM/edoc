@@ -34,8 +34,8 @@ public class EdocController {
     }
 
     @PutMapping("/topic")
-    public ResponseEntity<String> updateTopic(@RequestBody Topic topic){
-        String status = topicService.setAndUpdate(topic);
+    public ResponseEntity<String> updateTopic(@RequestBody TopicRequest topicRequest){
+        String status = topicService.setAndUpdate(topicRequest);
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
