@@ -9,8 +9,8 @@ public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String topicId;
+    private Long topicId;
+    private String topicNum;
     private String name;
     private Boolean isVisible;
 }

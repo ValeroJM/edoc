@@ -1,6 +1,8 @@
 package com.jmv.edoc.controller;
 
+import com.jmv.edoc.model.Doc;
 import com.jmv.edoc.model.Topic;
+import com.jmv.edoc.service.DocService;
 import com.jmv.edoc.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,9 @@ public class EdocController {
 
     @Autowired
     private TopicService topicService;
+
+    @Autowired
+    private DocService docService;
 
     @GetMapping("/status")
     public String status(){
@@ -48,6 +53,42 @@ public class EdocController {
     @DeleteMapping("/topic/{id}")
     public ResponseEntity<String> deleteTopic(@PathVariable Long id){
         String status = topicService.deleteById(id);
+        return new ResponseEntity<>(status, HttpStatus.OK);
+    }
+
+    @PostMapping("/doc")
+    public ResponseEntity<String> createDoc(@RequestBody Doc doc){
+        String status = docService.setAndUpdate(doc);
+        return new ResponseEntity<>(status, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/doc")
+    public ResponseEntity<String> updateDoc(@RequestBody Doc doc){
+        String status = docService.setAndUpdate(doc);
+        return new ResponseEntity<>(status, HttpStatus.OK);
+    }
+
+    @GetMapping("/doc/{id}")
+    public ResponseEntity<Doc> getDoc(@PathVariable Long id){
+        Doc doc = docService.getById(id);
+        return new ResponseEntity<>(doc, HttpStatus.OK);
+    }
+
+    @GetMapping("/doc/{ref}")
+    public ResponseEntity<Doc> getDocByRef(@PathVariable String ref){
+        Doc doc = docService.getByRef(ref);
+        return new ResponseEntity<>(doc, HttpStatus.OK);
+    }
+
+    @GetMapping("/docs")
+    public ResponseEntity<List<Doc>> getAllDocs(){
+        List<Doc> allDocs = docService.getAllDocs();
+        return new ResponseEntity<>(allDocs, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/doc/{id}")
+    public ResponseEntity<String> deleteDoc(@PathVariable Long id){
+        String status = docService.deleteById(id);
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
 }
