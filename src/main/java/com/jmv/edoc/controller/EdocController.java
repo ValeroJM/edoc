@@ -125,10 +125,10 @@ public class EdocController {
         List<Doc> docs = docService.getAllDocs();
         List<DocRequest> allDocs = new ArrayList<>();
 
-        DocRequest docRequest = new DocRequest();
-        Sale sale = new Sale();
-
         for(Doc doc: docs){
+            DocRequest docRequest = new DocRequest();
+            Sale sale = new Sale();
+
             docRequest.setDocId(doc.getDocId());
             docRequest.setRef(doc.getRef());
             docRequest.setDate(doc.getDate());
@@ -138,9 +138,11 @@ public class EdocController {
             docRequest.setDescription(docRequest.getDescription());
             docRequest.setAuthor(doc.getAuthor());
             docRequest.setStars(doc.getStars());
+
             sale.setInSale(doc.getInSale());
             sale.setPrice1(doc.getPrice1());
             sale.setPrice2(doc.getPrice2());
+
             docRequest.setSale(sale);
 
             allDocs.add(docRequest);
