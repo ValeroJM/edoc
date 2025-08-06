@@ -97,7 +97,7 @@ public class EdocController {
         return new ResponseEntity<>(docRequest, HttpStatus.OK);
     }
 
-    @GetMapping("/doc/{ref}")
+    @GetMapping("/docBy/{ref}")
     public ResponseEntity<DocRequest> getDocByRef(@PathVariable String ref){
         Doc doc = docService.getByRef(ref);
         DocRequest docRequest = new DocRequest();
