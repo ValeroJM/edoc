@@ -1,12 +1,10 @@
 package com.jmv.edoc.controller;
 
 import com.jmv.edoc.model.entity.Doc;
-import com.jmv.edoc.model.entity.Topic;
 import com.jmv.edoc.model.request.DocRequest;
 import com.jmv.edoc.model.request.Sale;
-import com.jmv.edoc.model.request.TopicRequest;
 import com.jmv.edoc.service.DocService;
-import com.jmv.edoc.service.TopicService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,63 +13,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/edoc")
-public class EdocController {
-
-    @Autowired
-    private TopicService topicService;
+public class DocController {
 
     @Autowired
     private DocService docService;
 
-    @GetMapping("/status")
-    public String status(){
-        return "OK";
-    }
-
-    @PostMapping("/topic")
-    public ResponseEntity<String> createTopic(@RequestBody TopicRequest topicRequest){
-        String status = topicService.setAndUpdate(topicRequest);
-        return new ResponseEntity<>(status, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/topic")
-    public ResponseEntity<String> updateTopic(@RequestBody TopicRequest topicRequest){
-        String status = topicService.setAndUpdate(topicRequest);
-        return new ResponseEntity<>(status, HttpStatus.OK);
-    }
-
-    @GetMapping("/topic/{id}")
-    public ResponseEntity<Topic> getTopic(@PathVariable Long id){
-        Topic topic = topicService.getById(id);
-        return new ResponseEntity<>(topic, HttpStatus.OK);
-    }
-
-    @GetMapping("/topics")
-    public ResponseEntity<List<Topic>> getAllTopics(){
-        List<Topic> allTopics = topicService.getAllTopics();
-        return new ResponseEntity<>(allTopics, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/topic/{id}")
-    public ResponseEntity<String> deleteTopic(@PathVariable Long id){
-        String status = topicService.deleteById(id);
-        return new ResponseEntity<>(status, HttpStatus.OK);
-    }
-
+    /**
+     * createDoc: This Post Request method will create a Doc in the DB
+     * @param docRequest
+     * @return status CREATED
+     */
     @PostMapping("/doc")
     public ResponseEntity<String> createDoc(@RequestBody DocRequest docRequest){
         String status = docService.setAndUpdate(docRequest);
         return new ResponseEntity<>(status, HttpStatus.CREATED);
     }
 
+    /**
+     * updateDoc: This Put Request method will update a Doc in the DB
+     * @param docRequest
+     * @return status OK
+     */
     @PutMapping("/doc")
     public ResponseEntity<String> updateDoc(@RequestBody DocRequest docRequest){
         String status = docService.setAndUpdate(docRequest);
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
+    /**
+     * getDoc: This Get Request method will return a Doc by ID
+     * @param id
+     * @return status OK
+     */
     @GetMapping("/doc/{id}")
     public ResponseEntity<DocRequest> getDoc(@PathVariable Long id){
         Doc doc = docService.getById(id);
@@ -97,6 +73,11 @@ public class EdocController {
         return new ResponseEntity<>(docRequest, HttpStatus.OK);
     }
 
+    /**
+     * getDocByRef: This Get Request method will return a Doc by Reference
+     * @param ref
+     * @return status OK
+     */
     @GetMapping("/docBy/{ref}")
     public ResponseEntity<DocRequest> getDocByRef(@PathVariable String ref){
         Doc doc = docService.getByRef(ref);
@@ -120,6 +101,10 @@ public class EdocController {
         return new ResponseEntity<>(docRequest, HttpStatus.OK);
     }
 
+    /**
+     * getAllDocs: This Get Request method will return all Docs from DB
+     * @return status OK
+     */
     @GetMapping("/docs")
     public ResponseEntity<List<DocRequest>> getAllDocs(){
         List<Doc> docs = docService.getAllDocs();
@@ -150,6 +135,11 @@ public class EdocController {
         return new ResponseEntity<>(allDocs, HttpStatus.OK);
     }
 
+    /**
+     * deleteDoc: This Delete Request method will delete a Doc from DB using its ID
+     * @param id
+     * @return status OK
+     */
     @DeleteMapping("/doc/{id}")
     public ResponseEntity<String> deleteDoc(@PathVariable Long id){
         String status = docService.deleteById(id);
